@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Believer - Imagine Dragons</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="music">
+            <img src="believer.jpg">
+            <div class="info">
+                <h1>Imagine Dragons - Believer (Lyrics)</h1>
+                <p>Album - ONE (Original Never Ends)</p>
+                <div id="waveform"></div>
+                <div class="controls">
+                    <img src="play.png" id="playBtn">
+                    <img src="stop.png" id="stopBtn">
+                    <img src="volume.png" id="volumeBtn">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        var playBtn = document.getElementById("playBtn");
+        var stopBtn = document.getElementById("stopBtn");
+        var volumeBtn = document.getElementById("volumeBtn");
+
+        var wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: '#dde5ec',
+            progressColor: '#03cebf',
+            barWidth: 4,
+            height: 90,
+            responsive: true,
+            hideScrollbar: true,
+            barRadius: 4,
+        });
+
+        wavesurfer.load('song.mp3');
+
+        playBtn.onclick = function(){
+            wavesurfer.playPause();
+            if(playBtn.src.includes("play.png")){
+                playBtn.src = "pause.png";
+            }else{
+                    playBtn.src = "play.png";
+                }
+        }
+        stopBtn.onclick = function(){
+            wavesurfer.stop();
+            playBtn.src = "play.png";
+        }
+        volumeBtn.onclick = function(){
+            wavesurfer.toggleMute();
+            if(volumeBtn.src.includes("volume.png")){
+                volumeBtn.src = "mute.png";
+            }else{
+                volumeBtn.src = "volume.png";
+                }
+        }
+
+
+        wavesurfer.on('finish', function () {
+            playBtn.src = "play.png";
+            wavesurfer.stop();
+    });
+
+
+    </script>
+
+
+
+
+    
+</body>
+</html>
